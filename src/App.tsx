@@ -1,9 +1,11 @@
+/* eslint-disable react/prefer-stateless-function */
 import React from 'react';
+import AppRouter from './router';
 
-function App() {
-  return (
-    <h1>Hello</h1>
-  );
+class App extends React.Component {
+  render() {
+    return <AppRouter />;
+  }
 }
 
 export default App;
