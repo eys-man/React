@@ -1,0 +1,17 @@
+.card-wrapper {
+  display: inline-block;
+  padding: 8px;
+  width: 30%;
+  height: 300px;
+  border: 1px solid black;
+  border-radius: 4px;
+  overflow-y: auto;
+}
+
+.card-image {
+  width: 30%;
+}
+
+.card-description {
+  font-size: 0.8rem;
+}

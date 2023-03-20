@@ -1,5 +1,7 @@
 import React from 'react';
 import Search from '../components/search/search';
+import CardList from '../components/CardList/cardList';
+import cardData from '../mock/mock';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class HomePage extends React.Component {
@@ -7,7 +9,9 @@ class HomePage extends React.Component {
     return (
       <div>
         <Search />
-        <p>Card List will be soon</p>
+        <div className="cards-container">
+          <CardList cardData={cardData} />
+        </div>
       </div>
     );
   }
