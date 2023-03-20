@@ -14,7 +14,7 @@ export type props = {
 class Card extends React.Component<props> {
   render(): JSX.Element {
     return (
-      <div className="card-wrapper" data-testid="card-test">
+      <div className="card-wrapper">
         <h3 className="card-title">
           <b>{this.props.id}</b>. {this.props.title}{' '}
         </h3>
