@@ -10,18 +10,9 @@ class AppRouter extends React.Component {
   render(): JSX.Element {
     return (
       <Routes>
-        <Route
-          path="/"
-          element={<Layout title="Home" content={<HomePage />} />}
-        />
-        <Route
-          path="/about"
-          element={<Layout title="About us" content={<AboutPage />} />}
-        />
-        <Route
-          path="*"
-          element={<Layout title="Page not found" content={<NotFoundPage />} />}
-        />
+        <Route path="/" element={<Layout title="Home" content={<HomePage />} />} />
+        <Route path="/about" element={<Layout title="About us" content={<AboutPage />} />} />
+        <Route path="*" element={<Layout title="Page not found" content={<NotFoundPage />} />} />
       </Routes>
     );
   }

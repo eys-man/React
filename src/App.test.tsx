@@ -1,14 +1,19 @@
-import { describe, it } from 'vitest';
+import { describe, test } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import Card from './components/Card/card';
 
-describe('App', () => {
-  it('Renders hello', () => {
-    render(<App />);
-    expect(
-      screen.getByRole('heading', {
-        level: 1,
-      })
-    ).toHaveTextContent('Hello');
+describe('Card', () => {
+  const props = {
+    id: 1,
+    image: 'image',
+    title: 'Title',
+    description: 'Description',
+  };
+
+  test('Renders a card', () => {
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    render(<Card {...props} />);
+    expect(screen.getByText(/Title/)).toBeInTheDocument();
+    expect(screen.getByText(/Description/)).toBeInTheDocument();
   });
 });

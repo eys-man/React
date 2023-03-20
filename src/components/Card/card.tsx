@@ -18,11 +18,7 @@ class Card extends React.Component<props> {
         <h3 className="card-title">
           <b>{this.props.id}</b>. {this.props.title}{' '}
         </h3>
-        <img
-          className="card-image"
-          src={this.props.image}
-          alt={this.props.title}
-        />
+        <img className="card-image" src={this.props.image} alt={this.props.title} />
         <p className="card-description">{this.props.description}</p>
       </div>
     );
