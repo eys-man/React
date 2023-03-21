@@ -1,0 +1,23 @@
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable react/prefer-stateless-function */
+import './header.css';
+import React from 'react';
+import Nav from '../Nav/nav';
+
+type props = { title: string };
+
+class Header extends React.Component<props> {
+  public render(): JSX.Element {
+    return (
+      <header className="header">
+        <div className="header-wrapper">
+          <h1>{this.props.title}</h1>
+          <Nav />
+        </div>
+      </header>
+    );
+  }
+}
+
+export default Header;
