@@ -3,7 +3,6 @@ import Search from '../components/search/search';
 import CardList from '../components/CardList/cardList';
 import cardData from '../mock/mock';
 
-// eslint-disable-next-line react/prefer-stateless-function
 class HomePage extends React.Component {
   render(): JSX.Element {
     return (

@@ -1,15 +1,14 @@
 import React from 'react';
+import './search.css';
 
 type SearchState = {
   search: string;
 };
 
 class Search extends React.Component {
-  // eslint-disable-next-line react/state-in-constructor
   public state: SearchState = { search: localStorage.getItem('search') || '' };
 
   public componentWillUnmount(value?: string): void {
-    // eslint-disable-next-line react/destructuring-assignment
     localStorage.setItem('search', value || this.state.search);
   }
 
@@ -22,8 +21,13 @@ class Search extends React.Component {
     const { search } = this.state;
     return (
       <div>
-        <div>
-          <input type="text" value={search} onChange={this.handleChange} />
+        <div className="search-wrapper">
+          <input
+            className="search"
+            type="text"
+            value={search}
+            onChange={this.handleChange}
+          />
         </div>
       </div>
     );

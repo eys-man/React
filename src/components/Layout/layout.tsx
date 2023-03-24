@@ -1,6 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/prefer-stateless-function */
-/* eslint-disable @typescript-eslint/naming-convention */
 import React from 'react';
 import Header from '../Header/Header';
 
