@@ -1,0 +1,11 @@
+.form-card {
+  width: 120px;
+  height: 200px;
+  margin: auto;
+  display: inline-block;
+  border: 1px solid blue;
+}
+
+.form-card p {
+  margin: 0;
+}
