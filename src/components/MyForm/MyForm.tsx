@@ -12,6 +12,8 @@ class MyForm extends React.Component<CardsProps> {
   agreeInput: React.RefObject<HTMLInputElement>;
   isAgreeInputValid: boolean;
   genderMaleInput: React.RefObject<HTMLInputElement>;
+  genderFemaleInput: React.RefObject<HTMLInputElement>;
+  isGenderInputValid: boolean;
   fileInput: React.RefObject<HTMLInputElement>;
   isFileInputValid: boolean;
 
@@ -25,6 +27,7 @@ class MyForm extends React.Component<CardsProps> {
     this.cityInput = React.createRef<HTMLSelectElement>();
     this.agreeInput = React.createRef<HTMLInputElement>();
     this.genderMaleInput = React.createRef<HTMLInputElement>();
+    this.genderFemaleInput = React.createRef<HTMLInputElement>();
     this.fileInput = React.createRef<HTMLInputElement>();
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,24 +36,9 @@ class MyForm extends React.Component<CardsProps> {
     this.isAgreeInputValid = true;
     this.isCityInputValid = true;
     this.isFileInputValid = true;
+    this.isGenderInputValid = true;
 
     this.cardList = { cardData: [] };
-    // this.cardList.cardData.push({
-    //   name: 'asdfghh',
-    //   time: '1920-01-04',
-    //   city: 'Moscow',
-    //   gender: 'male',
-    //   file: 'bara.jpg',
-    //   isAgree: true,
-    // });
-    // this.cardList.cardData.push({
-    //   name: 'хуй]',
-    //   time: '1980-01-04',
-    //   city: 'Bobruisk',
-    //   gender: 'male',
-    //   file: 'badfra.jpg',
-    //   isAgree: false,
-    // });
   }
 
   handleSubmit(event: { preventDefault: () => void }) {
@@ -62,9 +50,24 @@ class MyForm extends React.Component<CardsProps> {
     const time = (this.timeInput.current as HTMLInputElement).value;
     const city = (this.cityInput.current as HTMLSelectElement).value;
     const isAgree = (this.agreeInput.current as HTMLInputElement).checked;
-    let gender = 'female';
-    if ((this.genderMaleInput.current as HTMLInputElement).checked === true)
+
+    let gender = '';
+    if (
+      (this.genderMaleInput.current as HTMLInputElement).checked === false &&
+      (this.genderFemaleInput.current as HTMLInputElement).checked === false
+    ) {
+      this.isGenderInputValid = false;
+    } else if (
+      (this.genderMaleInput.current as HTMLInputElement).checked === true
+    ) {
       gender = 'male';
+      this.isGenderInputValid = true;
+    } else {
+      gender = 'female';
+      this.isGenderInputValid = true;
+    }
+    isAllValid &&= this.isGenderInputValid;
+
     const fileName = (this.fileInput.current as HTMLInputElement).value;
 
     if (validateName(name) !== '') {
@@ -89,7 +92,7 @@ class MyForm extends React.Component<CardsProps> {
 
     if (isAllValid === true) {
       alert(
-        `name = ${name}\nbirthday = ${time}\ncity = ${city}\ngender = ${gender}\nfileName = ${fileName}\nisAgree = ${isAgree}`
+        `CARD ADDED TO THE LIST\nname = ${name}\nbirthday = ${time}\ncity = ${city}\ngender = ${gender}\nfileName = ${fileName}\nisAgree = ${isAgree}`
       );
       this.cardList.cardData.push({
         name,
@@ -128,7 +131,6 @@ class MyForm extends React.Component<CardsProps> {
               min="1900-01-01"
               max="2010-01-01"
               ref={this.timeInput}
-              defaultValue="2000-01-01"
             />
           </div>
           <div>
@@ -156,14 +158,24 @@ class MyForm extends React.Component<CardsProps> {
                 id="male"
                 name="gender"
                 value="male"
-                defaultChecked
                 ref={this.genderMaleInput}
               />
               <label htmlFor="male">male</label>
-              <input type="radio" id="female" name="gender" value="female" />
+              <input
+                type="radio"
+                id="female"
+                name="gender"
+                value="female"
+                ref={this.genderFemaleInput}
+              />
               <label htmlFor="female">female</label>
             </div>
           </div>
+          {this.isGenderInputValid === false && (
+            <div className="warning">
+              <p>Choose gender</p>
+            </div>
+          )}
           <div>
             <label htmlFor="avatar">Choose file</label>
             <input type="file" id="avatar" name="file" ref={this.fileInput} />
@@ -197,7 +209,7 @@ class MyForm extends React.Component<CardsProps> {
           </div>
         </form>
         <div>
-          <h2>список карточек</h2>
+          <h2>Card List</h2>
           <FormCardList cardData={this.cardList.cardData} />
         </div>
       </>
