@@ -111,7 +111,7 @@ class MyForm extends React.Component<CardsProps> {
       <>
         <form className="form" onSubmit={this.handleSubmit}>
           <div>
-            <label htmlFor="name">Name: </label>
+            <label htmlFor="name">Name:</label>
             <input id="name" type="text" defaultValue="" ref={this.nameInput} />
           </div>
           {this.isNameInputValid === false && (
@@ -123,7 +123,7 @@ class MyForm extends React.Component<CardsProps> {
             </div>
           )}
           <div>
-            <label htmlFor="birthdate">Birthdate: </label>
+            <label htmlFor="birthdate">Birthdate:</label>
             <input
               id="birthdate"
               name="birthdate"
@@ -131,6 +131,7 @@ class MyForm extends React.Component<CardsProps> {
               min="1900-01-01"
               max="2010-01-01"
               ref={this.timeInput}
+              defaultValue="2000-01-01"
             />
           </div>
           <div>
