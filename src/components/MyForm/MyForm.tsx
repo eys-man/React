@@ -1,27 +1,22 @@
 import React from 'react';
 import './MyForm.css';
 import { validateName } from '../../utils/utils';
+import FormCardList, { CardsProps } from '../FormCardList/FormCardList';
 
-type Props = {
-  name: string;
-  time: string;
-  city: string;
-  isAgree: boolean;
-  gender: string;
-  file: string;
-};
-
-class MyForm extends React.Component<Props> {
+class MyForm extends React.Component<CardsProps> {
   nameInput: React.RefObject<HTMLInputElement>;
   isNameInputValid: boolean;
   timeInput: React.RefObject<HTMLInputElement>;
   cityInput: React.RefObject<HTMLSelectElement>;
+  isCityInputValid: boolean;
   agreeInput: React.RefObject<HTMLInputElement>;
   isAgreeInputValid: boolean;
   genderMaleInput: React.RefObject<HTMLInputElement>;
   fileInput: React.RefObject<HTMLInputElement>;
   isFileInputValid: boolean;
-  constructor(props: Props) {
+
+  cardList: CardsProps;
+  constructor(props: CardsProps) {
     super(props);
     this.state = props;
     this.state = { isSubmit: false };
@@ -36,7 +31,26 @@ class MyForm extends React.Component<Props> {
 
     this.isNameInputValid = true;
     this.isAgreeInputValid = true;
+    this.isCityInputValid = true;
     this.isFileInputValid = true;
+
+    this.cardList = { cardData: [] };
+    // this.cardList.cardData.push({
+    //   name: 'asdfghh',
+    //   time: '1920-01-04',
+    //   city: 'Moscow',
+    //   gender: 'male',
+    //   file: 'bara.jpg',
+    //   isAgree: true,
+    // });
+    // this.cardList.cardData.push({
+    //   name: 'хуй]',
+    //   time: '1980-01-04',
+    //   city: 'Bobruisk',
+    //   gender: 'male',
+    //   file: 'badfra.jpg',
+    //   isAgree: false,
+    // });
   }
 
   handleSubmit(event: { preventDefault: () => void }) {
@@ -53,127 +67,140 @@ class MyForm extends React.Component<Props> {
       gender = 'male';
     const fileName = (this.fileInput.current as HTMLInputElement).value;
 
-    // валидация
     if (validateName(name) !== '') {
-      alert(
-        'The name must contain at least six letters. Numbers and special characters are not allowed'
-      );
       this.isNameInputValid = false;
     } else this.isNameInputValid = true;
     isAllValid &&= this.isNameInputValid;
 
+    if (city === '') {
+      this.isCityInputValid = false;
+    } else this.isCityInputValid = true;
+    isAllValid &&= this.isCityInputValid;
+
     if (!fileName) {
-      alert('choose a file');
       this.isFileInputValid = false;
     } else this.isFileInputValid = true;
     isAllValid &&= this.isFileInputValid;
 
     if (!isAgree) {
-      alert('give your agreement');
       this.isAgreeInputValid = false;
     } else this.isAgreeInputValid = true;
     isAllValid &&= this.isAgreeInputValid;
 
-    // если валидация прошла, вывести карточки
     if (isAllValid === true) {
       alert(
-        `name = ${name}, birthday = ${time}, city = ${city}, isAgree = ${isAgree}, gender = ${gender}, fileName = ${fileName}`
+        `name = ${name}\nbirthday = ${time}\ncity = ${city}\ngender = ${gender}\nfileName = ${fileName}\nisAgree = ${isAgree}`
       );
+      this.cardList.cardData.push({
+        name,
+        time,
+        city,
+        gender,
+        file: fileName,
+        isAgree,
+      });
       this.setState({ isSubmit: true });
     } else this.setState({ isSubmit: true });
   }
 
   render(): JSX.Element {
     return (
-      <form className="form" onSubmit={this.handleSubmit}>
-        <div>
-          <label htmlFor="name">Name: </label>
-          <input id="name" type="text" defaultValue="" ref={this.nameInput} />
-        </div>
-        {this.isNameInputValid === false && (
-          <div className="warning">
-            <p>
-              The name must contain at least six letters. Numbers and special
-              characters are not allowed
-            </p>
-          </div>
-        )}
-        <div>
-          <label htmlFor="birthdate">Birthdate: </label>
-          <input
-            id="birthdate"
-            name="birthdate"
-            type="date"
-            min="1900-01-01"
-            max="2010-01-01"
-            ref={this.timeInput}
-            defaultValue="2000-01-01"
-          />
-        </div>
-        <div>
-          <label htmlFor="city">Place of residence:</label>
-          <select
-            name="city"
-            id="city"
-            defaultValue="Minsk"
-            ref={this.cityInput}
-          >
-            <option value="Minsk">Minsk</option>
-            <option value="Mogilev">Mogilev</option>
-            <option value="Brest">Brest</option>
-            <option value="Gomel">Gomel</option>
-            <option value="Vitebsk">Vitebsk</option>
-            <option value="Grodno">Grodno</option>
-          </select>
-        </div>
-        <div>
-          <span>Gender</span>
+      <>
+        <form className="form" onSubmit={this.handleSubmit}>
           <div>
+            <label htmlFor="name">Name: </label>
+            <input id="name" type="text" defaultValue="" ref={this.nameInput} />
+          </div>
+          {this.isNameInputValid === false && (
+            <div className="warning">
+              <p>
+                The name must contain at least six letters. Numbers and special
+                characters are not allowed
+              </p>
+            </div>
+          )}
+          <div>
+            <label htmlFor="birthdate">Birthdate: </label>
             <input
-              type="radio"
-              id="male"
-              name="gender"
-              value="male"
-              defaultChecked
-              ref={this.genderMaleInput}
+              id="birthdate"
+              name="birthdate"
+              type="date"
+              min="1900-01-01"
+              max="2010-01-01"
+              ref={this.timeInput}
+              defaultValue="2000-01-01"
             />
-            <label htmlFor="male">male</label>
-            <input type="radio" id="female" name="gender" value="female" />
-            <label htmlFor="female">female</label>
           </div>
-        </div>
-        <div>
-          <label htmlFor="avatar">Choose file</label>
-          <input type="file" id="avatar" name="file" ref={this.fileInput} />
-        </div>
-        {this.isFileInputValid === false && (
-          <div className="warning">
-            <p>Choose file</p>
+          <div>
+            <label htmlFor="city">Place of residence:</label>
+            <select name="city" id="city" defaultValue="" ref={this.cityInput}>
+              <option value=""></option>
+              <option value="Minsk">Minsk</option>
+              <option value="Mogilev">Mogilev</option>
+              <option value="Brest">Brest</option>
+              <option value="Gomel">Gomel</option>
+              <option value="Vitebsk">Vitebsk</option>
+              <option value="Grodno">Grodno</option>
+            </select>
           </div>
-        )}
-        <div>
-          <label htmlFor="agree">Agree to learn React</label>
-          <input
-            type="checkbox"
-            id="agree"
-            name="agree"
-            ref={this.agreeInput}
-          />
-        </div>
-        {this.isAgreeInputValid === false && (
-          <div className="warning">
-            <p>Give your agreement</p>
+          {this.isCityInputValid === false && (
+            <div className="warning">
+              <p>Choose city</p>
+            </div>
+          )}
+          <div>
+            <span>Gender</span>
+            <div>
+              <input
+                type="radio"
+                id="male"
+                name="gender"
+                value="male"
+                defaultChecked
+                ref={this.genderMaleInput}
+              />
+              <label htmlFor="male">male</label>
+              <input type="radio" id="female" name="gender" value="female" />
+              <label htmlFor="female">female</label>
+            </div>
           </div>
-        )}
+          <div>
+            <label htmlFor="avatar">Choose file</label>
+            <input type="file" id="avatar" name="file" ref={this.fileInput} />
+          </div>
+          {this.isFileInputValid === false && (
+            <div className="warning">
+              <p>Choose file</p>
+            </div>
+          )}
+          <div>
+            <label htmlFor="agree">Agree to learn React</label>
+            <input
+              type="checkbox"
+              id="agree"
+              name="agree"
+              ref={this.agreeInput}
+            />
+          </div>
+          {this.isAgreeInputValid === false && (
+            <div className="warning">
+              <p>Give your agreement</p>
+            </div>
+          )}
+          <div>
+            <button type="submit" value="submit">
+              Submit
+            </button>
+            <button type="reset" value="reset">
+              Reset
+            </button>
+          </div>
+        </form>
         <div>
-          <button type="submit" value="submit">
-            Submit
-          </button>
-          <button type="reset" value="reset">
-            Reset
-          </button>
+          <h2>список карточек</h2>
+          <FormCardList cardData={this.cardList.cardData} />
         </div>
-      </form>
+      </>
     );
   }
 }

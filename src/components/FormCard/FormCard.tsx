@@ -1,20 +1,16 @@
 import React from 'react';
 import './FormCard.css';
 
-export type FormCardProps = {
+export type CardData = {
   name: string;
   time: string;
   city: string;
+  isAgree: boolean;
   gender: string;
   file: string;
 };
 
-class FormCard extends React.Component<FormCardProps> {
-  // constructor(props: FormCardProps) {
-  //   super(props);
-  //   this.state = props;
-  // }
-
+class FormCard extends React.Component<CardData> {
   render(): JSX.Element {
     return (
       <div className="form-card" data-testid="form-card-test">
@@ -23,6 +19,7 @@ class FormCard extends React.Component<FormCardProps> {
         <p>{this.props.city}</p>
         <p>{this.props.gender}</p>
         <p>{this.props.file}</p>
+        <p>{this.props.isAgree}</p>
       </div>
     );
   }

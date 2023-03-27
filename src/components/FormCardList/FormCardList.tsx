@@ -1,8 +1,8 @@
 import React from 'react';
-import FormCard, { FormCardProps } from '../FormCard/FormCard';
+import FormCard, { CardData } from '../FormCard/FormCard';
 
 export type CardsProps = {
-  cardData: FormCardProps[];
+  cardData: CardData[];
 };
 
 class FormCardList extends React.Component<CardsProps> {
@@ -10,8 +10,8 @@ class FormCardList extends React.Component<CardsProps> {
     const { cardData } = this.props;
     return (
       <>
-        {cardData.map((cardProps: FormCardProps): JSX.Element => {
-          return <FormCard key={cardProps.name} {...cardProps} />;
+        {cardData.map((card: CardData): JSX.Element => {
+          return <FormCard key={card.name} {...card} />;
         })}
       </>
     );
