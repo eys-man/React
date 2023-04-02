@@ -1,9 +1,7 @@
-import React from 'react';
+import { FC } from 'react';
 
-class NotFoundPage extends React.Component {
-  render(): JSX.Element {
-    return <p>Error 404. This page doesn&apos;t exist</p>;
-  }
-}
+const NotFoundPage: FC = () => {
+  return <p>Error 404. This page doesn&apos;t exist</p>;
+};
 
 export default NotFoundPage;

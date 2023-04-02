@@ -5,7 +5,7 @@ import slardar from '../assets/slardar.jpg';
 import tidehunter from '../assets/tidehunter_2.jpg';
 import wisp from '../assets/wisp_2.jpg';
 
-const items = [
+const cards = [
   {
     id: 1,
     image: juggernaut,
@@ -46,4 +46,4 @@ const items = [
   },
 ];
 
-export default items;
+export default cards;

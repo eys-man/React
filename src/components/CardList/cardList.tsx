@@ -1,22 +1,14 @@
-import React from 'react';
-import Card, { props } from '../Card/card';
-import cardData from '../../mock/mock';
+import Card from '../Card/Card';
+import { CardData, CardsProps } from '../../Types/Types';
 
-type CardsProps = {
-  cardData: typeof cardData;
+const CardList = (props: CardsProps) => {
+  return (
+    <>
+      {props.cardData.map((cards: CardData) => {
+        return <Card key={cards.id} {...cards} />;
+      })}
+    </>
+  );
 };
-
-class CardList extends React.Component<CardsProps> {
-  render(): JSX.Element {
-    const { cardData } = this.props;
-    return (
-      <>
-        {cardData.map((cardProps: props): JSX.Element => {
-          return <Card key={cardProps.id} {...cardProps} />;
-        })}
-      </>
-    );
-  }
-}
 
 export default CardList;

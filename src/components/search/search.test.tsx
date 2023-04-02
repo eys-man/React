@@ -1,6 +1,6 @@
 import { test } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
-import Search from './search';
+import Search from './Search';
 
 test('Render SearchBar', () => {
   render(<Search />);

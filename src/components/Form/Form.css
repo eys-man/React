@@ -1,0 +1,28 @@
+.form {
+  justify-self: center;
+  min-width: 360px;
+  max-width: 640px;
+  width: 25%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+}
+
+.form div {
+  margin: 0.2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.submit {
+  display: block;
+  width: 40%;
+  background-color: lightblue;
+}
+
+.form div p {
+  color: red;
+  font-size: 0.6rem;
+  margin: 0;
+}

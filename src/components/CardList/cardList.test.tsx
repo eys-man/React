@@ -1,6 +1,6 @@
 import { describe, test } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import CardList from './cardList';
+import CardList from './CardList';
 import cardData from '../../mock/mock';
 
 describe('CardList Render', () => {
