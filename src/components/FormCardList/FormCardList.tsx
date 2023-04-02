@@ -1,21 +1,14 @@
-import React from 'react';
-import FormCard, { CardData } from '../FormCard/FormCard';
+import FormCard from '../FormCard/FormCard';
+import { FormCardsProps, FormCardData } from 'types/types';
 
-export type CardsProps = {
-  cardData: CardData[];
+const FormCardList = (props: FormCardsProps) => {
+  return (
+    <>
+      {props.cardData.map((cards: FormCardData) => {
+        return <FormCard key={cards.name} {...cards} />;
+      })}
+    </>
+  );
 };
-
-class FormCardList extends React.Component<CardsProps> {
-  render(): JSX.Element {
-    const { cardData } = this.props;
-    return (
-      <>
-        {cardData.map((card: CardData): JSX.Element => {
-          return <FormCard key={card.name} {...card} />;
-        })}
-      </>
-    );
-  }
-}
 
 export default FormCardList;

@@ -1,5 +1,5 @@
 import './Card.css';
-import { CardData } from '../../Types/Types';
+import { CardData } from '../../types/types';
 
 const Card = (props: CardData): JSX.Element => {
   return (

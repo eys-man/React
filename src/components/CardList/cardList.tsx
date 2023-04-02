@@ -1,5 +1,5 @@
 import Card from '../Card/Card';
-import { CardData, CardsProps } from '../../Types/Types';
+import { CardData, CardsProps } from '../../types/types';
 
 const CardList = (props: CardsProps) => {
   return (

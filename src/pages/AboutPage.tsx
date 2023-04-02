@@ -1,9 +1,7 @@
-import React from 'react';
+import { FC } from 'react';
 
-class AboutPage extends React.Component {
-  render(): JSX.Element {
-    return <p>eys-man 2023</p>;
-  }
-}
+const AboutPage: FC = () => {
+  return <p>eys-man 2023</p>;
+};
 
 export default AboutPage;

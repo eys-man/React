@@ -17,3 +17,7 @@ export type FormCardData = {
   gender: string;
   file: string;
 };
+
+export type FormCardsProps = {
+  cardData: Array<FormCardData>;
+};

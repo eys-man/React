@@ -1,20 +1,17 @@
-import React from 'react';
 import Header from '../Header/Header';
 
-type props = {
+type Props = {
   title: string;
   content: JSX.Element;
 };
 
-class Layout extends React.Component<props> {
-  public render(): JSX.Element {
-    return (
-      <>
-        <Header title={this.props.title} />
-        <main>{this.props.content}</main>
-      </>
-    );
-  }
-}
+const Layout = (prop: Props) => {
+  return (
+    <>
+      <Header title={prop.title} />
+      <main>{prop.content}</main>
+    </>
+  );
+};
 
 export default Layout;
