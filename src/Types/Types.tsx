@@ -13,10 +13,10 @@ export type FormCardData = {
   name: string;
   date: string;
   city: string;
-  agree: boolean;
   gender: string;
-  file: FileList;
-  filePath: string;
+  file?: FileList;
+  filePath?: string;
+  agree: boolean;
 };
 
 export type FormCardsProps = {

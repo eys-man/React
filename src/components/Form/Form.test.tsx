@@ -1,27 +1,37 @@
 import { describe, test } from 'vitest';
-import { render, screen } from '@testing-library/react';
-import FormCardList from '../FormCardList/FormCardList';
+import { fireEvent, render, screen } from '@testing-library/react';
+import FormPage from '../../pages/FormPage';
 
 describe('Form', () => {
-  const arr = [
-    {
-      name: 'Name',
-      time: '2020-01-01',
-      city: 'Minsk',
-      isAgree: true,
-      gender: 'male',
-      file: 'bara.jpg',
-    },
-  ];
-
   test('Renders Form', () => {
-    render(<FormCardList cardData={[...arr]} />);
-    expect(screen.getByLabelText('Name')).toBeInTheDocument();
-    expect(screen.getByLabelText('Birthday')).toBeInTheDocument();
-    expect(screen.getByLabelText('City')).toBeInTheDocument();
-    expect(screen.getByLabelText('male')).toBeInTheDocument();
-    expect(screen.getByLabelText('female')).toBeInTheDocument();
-    expect(screen.getByLabelText('Choose file')).toBeInTheDocument();
-    expect(screen.getByLabelText('Agree to learn React')).toBeInTheDocument();
+    render(<FormPage />);
+    expect(screen.getByText('Name')).toBeInTheDocument();
+    expect(screen.getByText('Birthday')).toBeInTheDocument();
+    expect(screen.getByText('City')).toBeInTheDocument();
+    expect(screen.getByText('male')).toBeInTheDocument();
+    expect(screen.getByText('female')).toBeInTheDocument();
+    expect(screen.getByText('Choose file')).toBeInTheDocument();
+    expect(screen.getByText('Agree to learn React')).toBeInTheDocument();
+  });
+
+  test('Radio buttons response', () => {
+    render(<FormPage />);
+    const radioMale = screen.getByRole<HTMLInputElement>('radio', {
+      name: 'male',
+    });
+    const radioFemale = screen.getByRole<HTMLInputElement>('radio', {
+      name: 'female',
+    });
+    fireEvent.click(radioMale);
+    expect(radioFemale).not.toBeChecked();
+    expect(radioMale).toBeChecked();
+  });
+
+  test('Checkbox response', () => {
+    render(<FormPage />);
+    const checkBox = screen.getByRole<HTMLInputElement>('checkbox', {});
+    expect(checkBox).not.toBeChecked();
+    fireEvent.click(checkBox);
+    expect(checkBox).toBeChecked();
   });
 });

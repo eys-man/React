@@ -1,29 +1,30 @@
 import { describe, test } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import FormCardList from './FormCardList';
+import { FormCardData } from '../../types/types';
 
 describe('FormCardList Render', () => {
-  const cardData = [
+  const cardMockData: FormCardData[] = [
     {
       name: 'Sam',
-      time: '2020-01-01',
+      date: '2020-01-01',
       city: 'Minsk',
       gender: 'male',
-      file: 'bara.jpg',
-      isAgree: true,
+      filePath: 'bara.jpg',
+      agree: true,
     },
     {
       name: 'Ann',
-      time: '2021-02-02',
+      date: '2021-02-02',
       city: 'Mogilev',
       gender: 'female',
-      file: 'sheep.jpg',
-      isAgree: true,
+      filePath: 'sheep.jpg',
+      agree: true,
     },
   ];
 
   test('Render all cards from mock data', () => {
-    render(<FormCardList cardData={cardData} />);
+    render(<FormCardList cardData={cardMockData} />);
     expect(screen.getAllByTestId('form-card-test')).toHaveLength(2);
   });
 });

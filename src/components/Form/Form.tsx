@@ -20,7 +20,8 @@ const Form: FC<FormProps> = ({ onChange }: FormProps) => {
   const onSubmit: SubmitHandler<FormCardData> = (data): void => {
     alert(`Карточка добавлена!`);
 
-    data.filePath = URL.createObjectURL(data.file[0]);
+    if (data.file !== undefined)
+      data.filePath = URL.createObjectURL(data.file[0]);
     onChange(data);
     reset();
   };
