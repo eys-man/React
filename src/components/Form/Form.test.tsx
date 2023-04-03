@@ -1,8 +1,8 @@
 import { describe, test } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import MyForm from './MyForm';
+import FormCardList from '../FormCardList/FormCardList';
 
-describe('MyForm', () => {
+describe('Form', () => {
   const arr = [
     {
       name: 'Name',
@@ -15,10 +15,10 @@ describe('MyForm', () => {
   ];
 
   test('Renders Form', () => {
-    render(<MyForm cardData={[...arr]} />);
-    expect(screen.getByLabelText('Name:')).toBeInTheDocument();
-    expect(screen.getByLabelText('Birthdate:')).toBeInTheDocument();
-    expect(screen.getByLabelText('Place of residence:')).toBeInTheDocument();
+    render(<FormCardList cardData={[...arr]} />);
+    expect(screen.getByLabelText('Name')).toBeInTheDocument();
+    expect(screen.getByLabelText('Birthday')).toBeInTheDocument();
+    expect(screen.getByLabelText('City')).toBeInTheDocument();
     expect(screen.getByLabelText('male')).toBeInTheDocument();
     expect(screen.getByLabelText('female')).toBeInTheDocument();
     expect(screen.getByLabelText('Choose file')).toBeInTheDocument();

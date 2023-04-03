@@ -4,12 +4,11 @@ import { FormCardData } from '../../types/types';
 const FormCard = (card: FormCardData) => {
   return (
     <div className="form-card" data-testid="form-card-test">
-      <h3>{card.name}</h3>
-      <p>{card.time}</p>
-      <p>{card.city}</p>
-      <p>{card.gender}</p>
-      <p>{card.file}</p>
-      <p>{card.isAgree}</p>
+      <h3>Name: {card.name}</h3>
+      <p>Birthday: {card.date}</p>
+      <p>City: {card.city}</p>
+      <p>Gender: {card.gender}</p>
+      <img src={card.filePath} />
     </div>
   );
 };

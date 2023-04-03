@@ -1,37 +1,34 @@
 import './Form.css';
 import { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { FormCardData } from '../../types/types';
 
-interface IFormInput {
-  name: string;
-  date: string;
-  city: string;
-  gender: string;
-  file: FileList;
-  agree: true;
-}
+type FormProps = {
+  onChange: (data: FormCardData) => void;
+};
 
-const Form: FC = () => {
+const Form: FC<FormProps> = ({ onChange }: FormProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<IFormInput>({
+  } = useForm<FormCardData>({
     mode: 'onSubmit',
   });
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    alert(`Карточка добавлена!\n${JSON.stringify(data)}`);
-    // alert(`file путь: ${URL.createObjectURL(data.file[0])}`);
-    // setA(URL.createObjectURL(data.file[0]));
+  const onSubmit: SubmitHandler<FormCardData> = (data): void => {
+    alert(`Карточка добавлена!`);
+
+    data.filePath = URL.createObjectURL(data.file[0]);
+    onChange(data);
     reset();
   };
 
   return (
     <form className="form" onSubmit={handleSubmit(onSubmit)}>
       <div>
-        <label htmlFor="name">Name:</label>
+        <label htmlFor="name">Name</label>
         <input
           {...register('name', {
             required: true,
@@ -50,7 +47,7 @@ const Form: FC = () => {
         )}
       </div>
       <div>
-        <label htmlFor="date">Birthday:</label>
+        <label htmlFor="date">Birthday</label>
         <input
           {...register('date', {
             required: true,

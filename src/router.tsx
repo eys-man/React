@@ -19,7 +19,7 @@ const AppRouter: FC = () => {
       />
       <Route
         path="/forms"
-        element={<Layout title="Form" content={<FormPage />} />}
+        element={<Layout title="Forms" content={<FormPage />} />}
       />
       <Route
         path="*"

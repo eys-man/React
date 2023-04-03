@@ -7,6 +7,14 @@
   border: 1px solid blue;
 }
 
+.form-card h3, 
 .form-card p {
   margin: 0;
+}
+
+.form-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border: 1px solid red;
 }

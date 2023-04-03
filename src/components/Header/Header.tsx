@@ -1,5 +1,4 @@
 import './header.css';
-import React from 'react';
 import Nav from '../Nav/nav';
 
 type Props = { title: string };
