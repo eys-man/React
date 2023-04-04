@@ -1,16 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './search.css';
 
 const Search = () => {
   const [search, setSearch] = useState(localStorage.getItem('search') || '');
 
+  const searchRef = useRef<string>();
+
+  useEffect((): void => {
+    searchRef.current = search;
+  }, [search]);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearch(event.target.value);
   };
 
-  useEffect((): void => {
-    localStorage.setItem('search', search);
-  }, [search]);
+  useEffect(() => {
+    return () => {
+      localStorage.setItem('search', searchRef.current as string);
+    };
+  }, []);
 
   return (
     <div>
