@@ -1,9 +1,8 @@
-import React from 'react';
+import { FC } from 'react';
+import AppRouter from './router';
 
-function App() {
-  return (
-    <h1>Hello</h1>
-  );
-}
+const App: FC = () => {
+  return <AppRouter />;
+};
 
 export default App;
