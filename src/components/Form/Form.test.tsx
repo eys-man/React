@@ -34,4 +34,29 @@ describe('Form', () => {
     fireEvent.click(checkBox);
     expect(checkBox).toBeChecked();
   });
+
+  test('Select box response', () => {
+    render(<FormPage />);
+    const selectBox = screen.getByRole<HTMLSelectElement>('combobox');
+    expect(
+      screen.getByRole<HTMLOptionElement>('option', {
+        name: '-- select city --',
+      }).selected
+    ).toBe(true);
+    expect(screen.getAllByRole('option').length).toBe(7);
+
+    fireEvent.change(selectBox, { target: { value: 'Mogilev' } });
+
+    expect(
+      screen.getByRole<HTMLOptionElement>('option', { name: 'Mogilev' })
+        .selected
+    ).toBe(true);
+    expect(selectBox.value).toBe('Mogilev');
+    expect(selectBox.value).not.toBe('');
+    expect(selectBox.value).not.toBe('Minsk');
+    expect(selectBox.value).not.toBe('Brest');
+    expect(selectBox.value).not.toBe('Grodno');
+    expect(selectBox.value).not.toBe('Gomel');
+    expect(selectBox.value).not.toBe('Vitebsk');
+  });
 });
