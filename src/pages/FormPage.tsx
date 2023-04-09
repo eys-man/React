@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import Form from '../components/Form/Form';
-import { FormCardData } from 'types/types';
+import { FormCardData } from 'Types/Types';
 import FormCardList from '../components/FormCardList/FormCardList';
 
 const FormPage: FC = () => {

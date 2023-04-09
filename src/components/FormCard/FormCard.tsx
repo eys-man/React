@@ -1,5 +1,5 @@
 import './FormCard.css';
-import { FormCardData } from '../../types/types';
+import { FormCardData } from '../../Types/Types';
 
 const FormCard = (card: FormCardData) => {
   return (

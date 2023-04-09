@@ -1,7 +1,7 @@
 import { describe, test } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import FormCardList from './FormCardList';
-import { FormCardData } from '../../types/types';
+import { FormCardData } from '../../Types/Types';
 
 describe('FormCardList Render', () => {
   const cardMockData: FormCardData[] = [

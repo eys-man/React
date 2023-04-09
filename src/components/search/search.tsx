@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import './search.css';
+import './Search.css';
 
 const Search = () => {
   const [search, setSearch] = useState(localStorage.getItem('search') || '');

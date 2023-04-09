@@ -1,13 +1,14 @@
 import Card from '../Card/Card';
-import { CardData, CardsProps } from '../../types/types';
+import { CardData, CardsData } from '../../Types/Types';
+import './CardList.css';
 
-const CardList = (props: CardsProps) => {
+const CardList = (props: CardsData) => {
   return (
-    <>
-      {props.cardData.map((cards: CardData) => {
-        return <Card key={cards.id} {...cards} />;
+    <div className="card-list">
+      {props.data.map((card: CardData) => {
+        return <Card key={card._id} {...card} />;
       })}
-    </>
+    </div>
   );
 };
 

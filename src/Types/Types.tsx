@@ -1,8 +1,33 @@
+// export type CardData = {
+//   id: number;
+//   image: string;
+//   title: string;
+//   description: string;
+// };
+
 export type CardData = {
-  id: number;
-  image: string;
-  title: string;
-  description: string;
+  _id: number;
+  films: string[];
+  shortFilms: string[];
+  tvShows: string[];
+  videoGames: string[];
+  parkAttractions: string[];
+  allies: string[];
+  enemies: string[];
+  sourceUrl: string;
+  name: string;
+  imageUrl: string;
+  createdAt: string;
+  updatedAt: string;
+  url: string;
+  __v: number;
+};
+
+export type CardsData = {
+  data: CardData[];
+  count?: number;
+  previousPage?: string;
+  nextPage?: string;
 };
 
 export type CardsProps = {
@@ -22,3 +47,14 @@ export type FormCardData = {
 export type FormCardsProps = {
   cardData: Array<FormCardData>;
 };
+
+export type ModalType = {
+  active: boolean;
+  setActive: ModalActivityCallback;
+  // children: JSX.Element;
+  // content: JSX.Element;
+  // setContent: ModalContentCallback;
+};
+
+export type ModalActivityCallback = (active: boolean) => void;
+export type ModalContentCallback = (content: JSX.Element) => JSX.Element;

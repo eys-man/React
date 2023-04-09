@@ -1,5 +1,5 @@
 import FormCard from '../FormCard/FormCard';
-import { FormCardsProps, FormCardData } from 'types/types';
+import { FormCardsProps, FormCardData } from 'Types/Types';
 
 const FormCardList = (props: FormCardsProps) => {
   return (

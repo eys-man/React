@@ -1,7 +1,7 @@
 import './Form.css';
 import { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { FormCardData } from '../../types/types';
+import { FormCardData } from '../../Types/Types';
 
 type FormProps = {
   onChange: (data: FormCardData) => void;
