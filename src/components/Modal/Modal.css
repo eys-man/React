@@ -1,26 +1,73 @@
-.modal {
+.overlay {
   width: 100vw;
-  height: 100hw;
-  background-color: rgba(0, 0, 0, 0.4);
+  height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transform: scale(0);
+  align-items: center;
+  padding: 40px;
 }
 
-.modal .active {
-  opacity: 1;
-  pointer-events: all;
-  transform: scale(1);
-}
-
-.modal-content {
-  height: 200px;
-  width: 200px;
+.modal-container {
+  width: 500px;
+  min-height: 50px;
   background-color: lightcyan;
+  position: relative;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.close,
+.cross {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background-color: lightblue;
+  transition: 0.2s ease all;
+  border-radius: 2px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close p {
+  margin: 0;
+  padding: 0;
+}
+
+.close:hover {
+  cursor: pointer;
+  background-color: blue;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: green;
+}
+
+.content h1 {
+  font-size: 42px;
+  font-weight: 700px;
+  margin-bottom: 10px;
+}
+
+.content p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.content img {
+  width: 100%;
+  vertical-align: top;
+  border-radius: 3px;
 }

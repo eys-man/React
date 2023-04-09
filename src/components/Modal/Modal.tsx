@@ -1,23 +1,33 @@
-import './Modal.css';
-import { ModalType } from '../../Types/Types';
-import { FC } from 'react';
+import PortalModal from '../PortalModal/PortalModal';
+import './/Modal.css';
 
-const Modal: FC<ModalType & JSX.Element> = (
-  { active, setActive },
-  children: JSX.Element
-) => {
+interface Props {
+  show: boolean;
+  setShow: (value: boolean) => void;
+  children: JSX.Element;
+}
+
+const Modal = ({ children, show, setShow }: Props) => {
+  const handleClose = () => {
+    // alert(`Close button clicked!`);
+    setShow(false);
+  };
+
   return (
-    <div
-      className={active === true ? 'modale active' : 'modal'}
-      onClick={() => {
-        setActive(false);
-        // setContent(<p>ХУЙ</p>);
-      }}
-    >
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        {children}
-      </div>
-    </div>
+    <>
+      {show && (
+        <PortalModal wrapperId="modal-portal">
+          <div className="overlay">
+            <div className="modal-container">
+              <div className="close" onClick={handleClose}>
+                <p>×</p>
+              </div>
+              <div className="content">{children}</div>
+            </div>
+          </div>
+        </PortalModal>
+      )}
+    </>
   );
 };
 

@@ -1,10 +1,3 @@
-// export type CardData = {
-//   id: number;
-//   image: string;
-//   title: string;
-//   description: string;
-// };
-
 export type CardData = {
   _id: number;
   films: string[];
@@ -51,9 +44,6 @@ export type FormCardsProps = {
 export type ModalType = {
   active: boolean;
   setActive: ModalActivityCallback;
-  // children: JSX.Element;
-  // content: JSX.Element;
-  // setContent: ModalContentCallback;
 };
 
 export type ModalActivityCallback = (active: boolean) => void;

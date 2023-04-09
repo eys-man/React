@@ -7,6 +7,7 @@ type Req = {
   page?: number;
   pageSize?: number;
   name?: string;
+  setShow: (show: boolean) => void;
 };
 
 const LoaderCardList: FC<Req> = ({ url, page, pageSize, name }) => {
