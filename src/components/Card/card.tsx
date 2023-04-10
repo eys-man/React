@@ -11,6 +11,7 @@ const Card = (props: CardData): JSX.Element => {
         className="card-wrapper"
         data-testid="card-test"
         onClick={() => {
+          value.setId(props._id);
           value.setShow(true);
         }}
       >
