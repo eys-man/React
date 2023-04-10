@@ -16,6 +16,27 @@ export type CardData = {
   __v?: number;
 };
 
+// ввели вместо CardData с 10.04.2023. козлы...
+export type NewCardData = {
+  item: {
+    _id: number;
+    films: string[];
+    shortFilms: string[];
+    tvShows: string[];
+    videoGames: string[];
+    parkAttractions: string[];
+    allies: string[];
+    enemies: string[];
+    sourceUrl?: string;
+    name: string;
+    imageUrl: string;
+    createdAt?: string;
+    updatedAt?: string;
+    url: string;
+    __v?: number;
+  };
+};
+
 export type CardsData = {
   data: CardData[];
   count?: number;
