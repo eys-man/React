@@ -11,7 +11,6 @@ const Card = (props: CardData): JSX.Element => {
         className="card-wrapper"
         data-testid="card-test"
         onClick={() => {
-          alert(`Click! id=${props._id}`);
           value.setShow(true);
         }}
       >

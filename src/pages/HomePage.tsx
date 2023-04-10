@@ -1,8 +1,8 @@
-import { FC, useContext, useEffect, useState } from 'react';
-import Search from '../components/Search/Search';
+import { FC, useEffect, useState } from 'react';
 import LoaderCardList from '../components/LoaderCardList/LoaderCardList';
 import Modal from '../components/Modal/Modal';
 import CardsContext from '../components/CardsContext/CardsContext';
+import Search from '../components/Search/Search';
 
 const HomePage: FC = () => {
   const [show, setShow] = useState<boolean>(false);
