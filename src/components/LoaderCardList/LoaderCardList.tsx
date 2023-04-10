@@ -7,7 +7,6 @@ type Req = {
   page?: number;
   pageSize?: number;
   name?: string;
-  setShow: (show: boolean) => void;
 };
 
 const LoaderCardList: FC<Req> = ({ url, page, pageSize, name }) => {
@@ -24,7 +23,6 @@ const LoaderCardList: FC<Req> = ({ url, page, pageSize, name }) => {
     name !== ''
       ? `${url.slice(0, url.length - 1)}?name=${name}`
       : `${url}?page=${page}&pageSize=${pageSize}`;
-  // alert(`requestUrl: ${requestUrl}\n`);
   useEffect(() => {
     fetch(requestUrl, { method: 'GET' })
       // fetch(`${url}?page=${page}&pageSize=${pageSize}`, { method: 'GET' })

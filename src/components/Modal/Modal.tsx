@@ -1,21 +1,22 @@
+import { useContext } from 'react';
 import PortalModal from '../PortalModal/PortalModal';
 import './/Modal.css';
+import CardsContext from '../CardsContext/CardsContext';
 
 interface Props {
-  show: boolean;
-  setShow: (value: boolean) => void;
   children: JSX.Element;
 }
 
-const Modal = ({ children, show, setShow }: Props) => {
+const Modal = ({ children }: Props) => {
+  const value = useContext(CardsContext);
+
   const handleClose = () => {
-    // alert(`Close button clicked!`);
-    setShow(false);
+    value.setShow(false);
   };
 
   return (
     <>
-      {show && (
+      {value.show && (
         <PortalModal wrapperId="modal-portal">
           <div className="overlay">
             <div className="modal-container">

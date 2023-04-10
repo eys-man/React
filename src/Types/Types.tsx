@@ -7,13 +7,13 @@ export type CardData = {
   parkAttractions: string[];
   allies: string[];
   enemies: string[];
-  sourceUrl: string;
+  sourceUrl?: string;
   name: string;
   imageUrl: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
   url: string;
-  __v: number;
+  __v?: number;
 };
 
 export type CardsData = {
@@ -40,11 +40,3 @@ export type FormCardData = {
 export type FormCardsProps = {
   cardData: Array<FormCardData>;
 };
-
-export type ModalType = {
-  active: boolean;
-  setActive: ModalActivityCallback;
-};
-
-export type ModalActivityCallback = (active: boolean) => void;
-export type ModalContentCallback = (content: JSX.Element) => JSX.Element;
