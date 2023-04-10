@@ -16,7 +16,7 @@ export type CardData = {
   __v?: number;
 };
 
-// ввели вместо CardData с 10.04.2023. козлы...
+// ввели вместо CardData с 10.04.2023
 export type NewCardData = {
   item: {
     _id: number;
