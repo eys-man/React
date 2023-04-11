@@ -1,33 +1,38 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import CardList from '../CardList/CardList';
 import { CardsData } from '../../Types/Types';
+import CardsContext from '../../components/CardsContext/CardsContext';
 
 type Req = {
-  url: string;
   page?: number;
   pageSize?: number;
-  name?: string;
 };
 
-const LoaderCardList: FC<Req> = ({ url, page, pageSize, name }) => {
+const LoaderCardList: FC<Req> = ({ page, pageSize }) => {
+  const value = useContext(CardsContext);
+
   const [error, setError] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [items, setItems] = useState<CardsData>({
     data: [],
-    count: 0,
+    info: {
+      count: 0,
+    },
     previousPage: '',
     nextPage: '',
   });
 
-  const requestUrl =
-    name !== ''
-      ? `${url.slice(0, url.length - 1)}?name=${name}`
-      : `${url}?page=${page}&pageSize=${pageSize}`;
+  let requestUrl = `https://api.disneyapi.dev/characters`;
+  if (value.search !== '')
+    requestUrl = `https://api.disneyapi.dev/character/?name=${value.search}`;
 
   useEffect(() => {
     fetch(requestUrl, { method: 'GET' })
-      // fetch(`${url}?page=${page}&pageSize=${pageSize}`, { method: 'GET' })
-      .then((res) => res.json())
+      .then((resp) => {
+        if (resp.status == 200) return resp.json();
+        else throw new Error('Error');
+      })
+      // .then((res) => res.json())
       .then(
         (result) => {
           setIsLoaded(true);
@@ -39,7 +44,7 @@ const LoaderCardList: FC<Req> = ({ url, page, pageSize, name }) => {
           setError(error);
         }
       );
-  }, [page, pageSize, requestUrl, url]);
+  }, [page, pageSize, requestUrl]);
 
   if (error) {
     return <div>Error loading data!</div>;
@@ -48,7 +53,7 @@ const LoaderCardList: FC<Req> = ({ url, page, pageSize, name }) => {
   } else {
     return (
       <>
-        {name === '' && (
+        {value.search === '' && (
           <p>
             page: {page}, cards on page: {pageSize}
           </p>

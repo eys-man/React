@@ -5,6 +5,8 @@ interface ICardContext {
   setShow: (show: boolean) => void;
   id: number;
   setId: (id: number) => void;
+  search: string;
+  setSearch: (search: string) => void;
 }
 
 const CardsContext = React.createContext<ICardContext>({
@@ -12,6 +14,8 @@ const CardsContext = React.createContext<ICardContext>({
   setShow: () => {},
   id: -1,
   setId: () => {},
+  search: '',
+  setSearch: () => {},
 });
 
 export default CardsContext;

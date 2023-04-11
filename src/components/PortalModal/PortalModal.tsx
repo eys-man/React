@@ -12,8 +12,7 @@ const PortalModal = ({ children, wrapperId }: Props) => {
   useLayoutEffect(() => {
     let element = document.getElementById(wrapperId) as HTMLElement;
     let portalCreated = false;
-    // if element is not found with wrapperId or wrapperId is not provided,
-    // create and append to body
+
     if (!element) {
       element = createWrapperAndAppendToBody(wrapperId);
       portalCreated = true;
@@ -21,9 +20,7 @@ const PortalModal = ({ children, wrapperId }: Props) => {
 
     setPortalElement(element);
 
-    // cleaning up the portal element
     return () => {
-      // delete the programatically created element
       if (portalCreated && element.parentNode) {
         element.parentNode.removeChild(element);
       }
@@ -37,7 +34,6 @@ const PortalModal = ({ children, wrapperId }: Props) => {
     return element;
   };
 
-  // portalElement state will be null on the very first render.
   if (!portalElement) return null;
 
   return createPortal(children, portalElement);

@@ -8,6 +8,7 @@ import FullCard from '../components/FullCard/FullCard';
 const HomePage: FC = () => {
   const [show, setShow] = useState<boolean>(false);
   const [id, setId] = useState<number>(-1);
+  const [search, setSearch] = useState<string>('');
 
   const handlerSetShow = () => {
     setShow(!show);
@@ -15,20 +16,22 @@ const HomePage: FC = () => {
 
   useEffect(() => {
     return () => {};
-  }, [show, setShow]);
+  }, [show, setShow, search, setSearch]);
 
   return (
     <CardsContext.Provider
-      value={{ show: show, setShow: handlerSetShow, id: id, setId: setId }}
+      value={{
+        show: show,
+        setShow: handlerSetShow,
+        id: id,
+        setId: setId,
+        search: search,
+        setSearch: setSearch,
+      }}
     >
       <Search />
       <div className="cards-container" style={{ width: '100', height: '100' }}>
-        <LoaderCardList
-          url={'https://api.disneyapi.dev/characters'}
-          page={1}
-          pageSize={50}
-          name={``}
-        />
+        <LoaderCardList page={1} pageSize={50} />
       </div>
       <Modal>
         <FullCard />

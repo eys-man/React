@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import PortalModal from '../PortalModal/PortalModal';
-import './/Modal.css';
+import './Modal.css';
 import CardsContext from '../CardsContext/CardsContext';
 
 interface Props {

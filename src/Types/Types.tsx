@@ -39,7 +39,9 @@ export type NewCardData = {
 
 export type CardsData = {
   data: CardData[];
-  count?: number;
+  info?: {
+    count: number;
+  };
   previousPage?: string;
   nextPage?: string;
 };

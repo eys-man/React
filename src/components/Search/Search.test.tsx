@@ -14,4 +14,3 @@ test('Change value of SearchBar', () => {
   });
   expect(screen.getByRole<HTMLInputElement>('textbox').value).toBe('2023');
 });
-    
