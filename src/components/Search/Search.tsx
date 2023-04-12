@@ -5,12 +5,11 @@ import './Search.css';
 const Search = () => {
   const value = useContext(CardsContext);
 
-  const [searchValue, setSearchValue] = useState(
-    localStorage.getItem('search') || ''
-  );
+  const [searchValue, setSearchValue] = useState(value.search);
+
   const searchRef = useRef<string>();
 
-  useEffect((): void => {
+  useEffect(() => {
     searchRef.current = searchValue;
   }, [searchValue]);
 
@@ -23,14 +22,9 @@ const Search = () => {
   ): void => {
     if (event.key === 'Enter') {
       value.setSearch(searchValue);
+      localStorage.setItem('search', searchRef.current as string);
     }
   };
-
-  useEffect(() => {
-    return () => {
-      localStorage.setItem('search', searchRef.current as string);
-    };
-  }, []);
 
   return (
     <div>

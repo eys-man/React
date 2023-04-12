@@ -5,7 +5,9 @@ import { CardsData } from 'Types/Types';
 
 describe('CardList Render', () => {
   const cards: CardsData = {
-    count: 3,
+    info: {
+      count: 3,
+    },
     data: [
       {
         _id: 10,
@@ -50,7 +52,7 @@ describe('CardList Render', () => {
   };
 
   test('Render all cards from mock data', () => {
-    render(<CardList data={cards.data} />);
+    render(<CardList {...cards} />);
     expect(screen.getAllByTestId('card-test')).toHaveLength(3);
   });
 });
