@@ -29,7 +29,7 @@ const HomePage: FC = () => {
     setIsLoaded(false);
     setError(false);
     const requestUrl =
-      search === `` ? `${baseUrl}s` : `${baseUrl}?name=${search}`;
+      search === `` ? `${baseUrl}` : `${baseUrl}?name=${search}`;
 
     fetch(requestUrl, { method: 'GET' })
       .then((response) => {
