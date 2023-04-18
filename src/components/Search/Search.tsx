@@ -1,17 +1,18 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import CardsContext from '../../components/CardsContext/CardsContext';
+import React, { useState } from 'react';
 import './Search.css';
+import { AppDispatch, RootState } from '../../Redux/store';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { setQuery } from '../../Redux/Reducers/searchSlice';
+
+const useAppDispatch = () => useDispatch<AppDispatch>();
+const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 const Search = () => {
-  const value = useContext(CardsContext);
+  const search = useAppSelector((state) => state.searchReducer.search);
 
-  const [searchValue, setSearchValue] = useState(value.search);
+  const dispatch = useAppDispatch();
 
-  const searchRef = useRef<string>();
-
-  useEffect(() => {
-    searchRef.current = searchValue;
-  }, [searchValue]);
+  const [searchValue, setSearchValue] = useState(search);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchValue(event.target.value);
@@ -21,8 +22,7 @@ const Search = () => {
     event: React.KeyboardEvent<HTMLInputElement>
   ): void => {
     if (event.key === 'Enter') {
-      value.setSearch(searchValue);
-      localStorage.setItem('search', searchRef.current as string);
+      dispatch(setQuery(searchValue));
     }
   };
 

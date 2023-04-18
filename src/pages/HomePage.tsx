@@ -5,15 +5,18 @@ import Search from '../components/Search/Search';
 import FullCard from '../components/FullCard/FullCard';
 import { CardsData } from 'Types/Types';
 import CardList from '../components/CardList/CardList';
+import { TypedUseSelectorHook, useSelector } from 'react-redux';
+import { RootState } from '../Redux/store';
 
 const baseUrl = `https://api.disneyapi.dev/character`;
+const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 const HomePage: FC = () => {
+  const searchValue = useAppSelector((state) => state.searchReducer.search);
+
   const [show, setShow] = useState<boolean>(false);
   const [id, setId] = useState<number>(-1);
 
-  let searchValue = localStorage.getItem('search');
-  if (searchValue === null) searchValue = '';
   const [cardsList, setCardsList] = useState<CardsData>({
     data: [],
     info: { count: 0 },
@@ -44,10 +47,9 @@ const HomePage: FC = () => {
       .catch((e) => {
         setError(true);
         alert(e.message);
-        localStorage.setItem('search', '');
         setSearch('');
       });
-  }, [search]);
+  }, [search, searchValue]);
 
   return (
     <CardsContext.Provider
@@ -63,6 +65,7 @@ const HomePage: FC = () => {
       }}
     >
       <Search />
+      <p>{}</p>
       <div className="cards-container" style={{ width: '100', height: '100' }}>
         {isLoaded ? <CardList {...cardsList} /> : <p>Loading...</p>}
         {error && <p>Error!</p>}
