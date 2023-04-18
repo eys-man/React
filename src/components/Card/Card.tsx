@@ -1,9 +1,9 @@
 import './Card.css';
-import { CardData } from '../../Types/Types';
+import { RMCardData } from '../../Types/Types';
 import { useContext } from 'react';
 import CardsContext from '../CardsContext/CardsContext';
 
-const Card = (props: CardData): JSX.Element => {
+const Card = (props: RMCardData): JSX.Element => {
   const value = useContext(CardsContext);
   return (
     <>
@@ -11,15 +11,15 @@ const Card = (props: CardData): JSX.Element => {
         className="card-wrapper"
         data-testid="card-test"
         onClick={() => {
-          value.setId(props._id);
+          value.setId(props.id);
           value.setShow(true);
         }}
       >
         <h3 className="card-title">{props.name}</h3>
         <img
           className="card-image"
-          key={props._id}
-          src={props.imageUrl}
+          key={props.id}
+          src={props.image}
           alt={props.name}
         />
       </div>

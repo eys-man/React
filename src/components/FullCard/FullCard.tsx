@@ -1,33 +1,40 @@
 import './FullCard.css';
-import { NewCardData } from '../../Types/Types';
+import { RMCardData } from '../../Types/Types';
 import { useContext, useEffect, useState } from 'react';
 import CardsContext from '../CardsContext/CardsContext';
 
-const defaultCard: NewCardData = {
-  item: {
-    _id: -1,
-    films: [],
-    shortFilms: [],
-    tvShows: [],
-    videoGames: [],
-    parkAttractions: [],
-    allies: [],
-    enemies: [],
+const defaultCard: RMCardData = {
+  id: -1,
+  name: '',
+  status: '',
+  species: '',
+  type: '',
+  gender: '',
+  origin: {
     name: '',
-    imageUrl: '',
     url: '',
   },
+  location: {
+    name: '',
+    url: '',
+  },
+  image: '',
+  episode: [],
+  url: '',
+  created: '',
 };
 
 const FullCard = (): JSX.Element => {
   const [error, setError] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [item, setItem] = useState<NewCardData>(defaultCard);
+  const [item, setItem] = useState<RMCardData>(defaultCard);
 
   const value = useContext(CardsContext);
 
   const requestUrl =
-    value.id !== -1 ? `https://api.disneyapi.dev/characters/${value.id}` : ``;
+    value.id !== -1
+      ? `https://rickandmortyapi.com/api/character/${value.id}`
+      : ``;
 
   useEffect(() => {
     fetch(requestUrl, { method: 'GET' })
@@ -53,36 +60,20 @@ const FullCard = (): JSX.Element => {
     return (
       <>
         <div className="full-card-wrapper" data-testid="card-test">
-          <h3 className="full-card-title">{`${item.item._id}. ${item.item.name}`}</h3>
-          <img
-            className="full-card-image"
-            src={item.item.imageUrl}
-            alt={item.item.name}
-          />
-          <h4 className="full-card-sections">Films:</h4>
-          <div className="full-card-list">
-            {item.item.films.map((film, index) => {
-              return <p key={index}>{film}</p>;
-            })}
-          </div>
-          <h4 className="full-card-sections">Short films:</h4>
-          <div className="full-card-list">
-            {item.item.shortFilms.map((film, index) => {
-              return <p key={index}>{film}</p>;
-            })}
-          </div>
-          <h4 className="full-card-sections">TV Shows:</h4>
-          <div className="full-card-list">
-            {item.item.tvShows.map((film, index) => {
-              return <p key={index}>{film}</p>;
-            })}
-          </div>
-          <h4 className="full-card-sections">VideoGames:</h4>
-          <div className="full-card-list">
-            {item.item.videoGames.map((film, index) => {
-              return <p key={index}>{film}</p>;
-            })}
-          </div>
+          <h3 className="full-card-title">{`${item.id}. ${item.name}`}</h3>
+          <img className="full-card-image" src={item.image} alt={item.name} />
+          <h4>Status: {item.status}</h4>
+          <h4>Species: {item.species}</h4>
+          <h4>Type: {item.type}</h4>
+          <h4>Gender: {item.gender}</h4>
+          <ul className="full-card-sections">
+            Episodes:
+            <div className="full-card-list">
+              {item.episode.map((ep, index) => {
+                return <li key={index}>{ep}</li>;
+              })}
+            </div>
+          </ul>
         </div>
       </>
     );

@@ -1,4 +1,4 @@
-import { CardsData } from '../../Types/Types';
+import { RMCardsData } from '../../Types/Types';
 import React from 'react';
 
 interface ICardContext {
@@ -8,8 +8,8 @@ interface ICardContext {
   setId: (id: number) => void;
   search: string;
   setSearch: (search: string) => void;
-  cardsList: CardsData;
-  setCardsList: (cardsList: CardsData) => void;
+  cardsList: RMCardsData;
+  setCardsList: (cardsList: RMCardsData) => void;
 }
 
 const CardsContext = React.createContext<ICardContext>({
@@ -19,7 +19,7 @@ const CardsContext = React.createContext<ICardContext>({
   setId: () => {},
   search: '',
   setSearch: () => {},
-  cardsList: { info: { count: 0 }, data: [] },
+  cardsList: { info: { count: 0 }, results: [] },
   setCardsList: () => {},
 });
 

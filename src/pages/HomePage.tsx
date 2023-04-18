@@ -3,12 +3,12 @@ import Modal from '../components/Modal/Modal';
 import CardsContext from '../components/CardsContext/CardsContext';
 import Search from '../components/Search/Search';
 import FullCard from '../components/FullCard/FullCard';
-import { CardsData } from 'Types/Types';
+import { RMCardsData } from 'Types/Types';
 import CardList from '../components/CardList/CardList';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 import { RootState } from '../Redux/store';
 
-const baseUrl = `https://api.disneyapi.dev/character`;
+const baseUrl = `https://rickandmortyapi.com/api/character`;
 const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 const HomePage: FC = () => {
@@ -17,14 +17,13 @@ const HomePage: FC = () => {
   const [show, setShow] = useState<boolean>(false);
   const [id, setId] = useState<number>(-1);
 
-  const [cardsList, setCardsList] = useState<CardsData>({
-    data: [],
+  const [cardsList, setCardsList] = useState<RMCardsData>({
+    results: [],
     info: { count: 0 },
   });
 
-  const [search, setSearch] = useState<string>(
-    searchValue !== null ? searchValue : ''
-  );
+  const [search, setSearch] = useState<string>(searchValue);
+
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(false);
 
@@ -32,7 +31,7 @@ const HomePage: FC = () => {
     setIsLoaded(false);
     setError(false);
     const requestUrl =
-      search === `` ? `${baseUrl}` : `${baseUrl}?name=${search}`;
+      searchValue === `` ? `${baseUrl}` : `${baseUrl}/?name=${searchValue}`;
 
     fetch(requestUrl, { method: 'GET' })
       .then((response) => {

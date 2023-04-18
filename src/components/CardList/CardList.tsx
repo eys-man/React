@@ -1,13 +1,13 @@
 import Card from '../Card/Card';
-import { CardData, CardsData } from '../../Types/Types';
+import { RMCardData, RMCardsData } from '../../Types/Types';
 import './CardList.css';
 
-const CardList = (data: CardsData) => {
+const CardList = (data: RMCardsData) => {
   // const value = useContext(CardsContext);
   return (
     <div className="card-list">
-      {data.data.map((card: CardData) => {
-        return <Card key={card._id} {...card} />;
+      {data.results.map((card: RMCardData) => {
+        return <Card key={card.id} {...card} />;
       })}
     </div>
   );
