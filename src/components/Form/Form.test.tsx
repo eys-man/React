@@ -1,10 +1,16 @@
 import { describe, test } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 import FormPage from '../../pages/FormPage';
+import { Provider } from 'react-redux';
+import { store } from '../../Redux/store';
 
 describe('Form', () => {
   test('Renders Form', () => {
-    render(<FormPage />);
+    render(
+      <Provider store={store}>
+        <FormPage />
+      </Provider>
+    );
     expect(screen.getByText('Name')).toBeInTheDocument();
     expect(screen.getByText('Birthday')).toBeInTheDocument();
     expect(screen.getByText('City')).toBeInTheDocument();
@@ -15,7 +21,11 @@ describe('Form', () => {
   });
 
   test('Radio buttons response', () => {
-    render(<FormPage />);
+    render(
+      <Provider store={store}>
+        <FormPage />
+      </Provider>
+    );
     const radioMale = screen.getByRole<HTMLInputElement>('radio', {
       name: 'male',
     });
@@ -28,7 +38,11 @@ describe('Form', () => {
   });
 
   test('Checkbox response', () => {
-    render(<FormPage />);
+    render(
+      <Provider store={store}>
+        <FormPage />
+      </Provider>
+    );
     const checkBox = screen.getByRole<HTMLInputElement>('checkbox', {});
     expect(checkBox).not.toBeChecked();
     fireEvent.click(checkBox);
@@ -36,7 +50,11 @@ describe('Form', () => {
   });
 
   test('Select box response', () => {
-    render(<FormPage />);
+    render(
+      <Provider store={store}>
+        <FormPage />
+      </Provider>
+    );
     const selectBox = screen.getByRole<HTMLSelectElement>('combobox');
     expect(
       screen.getByRole<HTMLOptionElement>('option', {

@@ -1,52 +1,73 @@
 import { describe, test } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import CardList from './CardList';
-import { CardsData } from 'Types/Types';
+import { RMCardsData } from '../../Types/Types';
 
 describe('CardList Render', () => {
-  const cards: CardsData = {
+  const cards: RMCardsData = {
     info: {
       count: 3,
     },
-    data: [
+    results: [
       {
-        _id: 10,
-        films: [],
-        shortFilms: [],
-        tvShows: [],
-        videoGames: [],
-        parkAttractions: [],
-        allies: [],
-        enemies: [],
-        name: 'Card name 1',
-        imageUrl: '',
+        id: 10,
+        name: 'Rick',
+        status: '',
+        species: '',
+        type: '',
+        gender: 'male',
+        origin: {
+          name: '',
+          url: '',
+        },
+        location: {
+          name: 'Minsk',
+          url: '',
+        },
+        image: '',
+        episode: [],
         url: '',
+        created: '',
       },
       {
-        _id: 20,
-        films: [],
-        shortFilms: [],
-        tvShows: [],
-        videoGames: [],
-        parkAttractions: [],
-        allies: [],
-        enemies: [],
-        name: 'Card name 2',
-        imageUrl: '',
+        id: 20,
+        name: 'Pete',
+        status: '',
+        species: '',
+        type: '',
+        gender: 'male',
+        origin: {
+          name: '',
+          url: '',
+        },
+        location: {
+          name: 'Mogilev',
+          url: '',
+        },
+        image: '',
+        episode: [],
         url: '',
+        created: '',
       },
       {
-        _id: 30,
-        films: [],
-        shortFilms: [],
-        tvShows: [],
-        videoGames: [],
-        parkAttractions: [],
-        allies: [],
-        enemies: [],
-        name: 'Card name 3',
-        imageUrl: '',
+        id: 30,
+        name: 'Root',
+        status: '',
+        species: '',
+        type: '',
+        gender: 'female',
+        origin: {
+          name: '',
+          url: '',
+        },
+        location: {
+          name: 'Pinsk',
+          url: '',
+        },
+        image: '',
+        episode: [],
         url: '',
+        created: '',
       },
     ],
   };

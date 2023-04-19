@@ -4,22 +4,30 @@ import Card from './Card';
 
 describe('Card', () => {
   const props = {
-    _id: 10,
-    films: [],
-    shortFilms: [],
-    tvShows: [],
-    videoGames: [],
-    parkAttractions: [],
-    allies: [],
-    enemies: [],
-    name: 'Card name',
-    imageUrl: '',
+    id: 10,
+    name: 'Rick',
+    status: '',
+    species: '',
+    type: '',
+    gender: 'male',
+    origin: {
+      name: '',
+      url: '',
+    },
+    location: {
+      name: 'Minsk',
+      url: '',
+    },
+    image: '',
+    episode: [],
     url: '',
+    created: '',
   };
 
-  test('Render a card', () => {
+  test('Render a card with a picture', () => {
     render(<Card {...props} />);
-    expect(screen.getByText(/Card name/)).toBeInTheDocument();
-    // expect(screen.getByText(/Description/)).toBeInTheDocument();
+    const img = screen.getByRole('img');
+    expect(img).toBeTruthy();
+    expect(screen.getByText(/Rick/)).toBeInTheDocument();
   });
 });
