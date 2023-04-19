@@ -9,7 +9,7 @@ export const rmApi = createApi({
     baseUrl: baseUrl,
   }),
   endpoints: (builder) => ({
-    getCardsBySearchQuery: builder.query<RMCardsData, string>({
+    getCardsBySearch: builder.query<RMCardsData, string>({
       query: (name) => `character/?name=${name}`,
     }),
     getCardById: builder.query<RMCardData, number>({
@@ -18,4 +18,4 @@ export const rmApi = createApi({
   }),
 });
 
-export const { useGetCardsBySearchQueryQuery, useGetCardByIdQuery } = rmApi;
+export const { useGetCardsBySearchQuery, useGetCardByIdQuery } = rmApi;
