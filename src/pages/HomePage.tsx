@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import Modal from '../components/Modal/Modal';
 import CardsContext from '../components/CardsContext/CardsContext';
 import Search from '../components/Search/Search';
@@ -7,8 +7,8 @@ import { RMCardsData } from 'Types/Types';
 import CardList from '../components/CardList/CardList';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 import { RootState } from '../Redux/store';
+import { useGetCardsBySearchQuery } from '../Redux/Reducers/apiSlice';
 
-const baseUrl = `https://rickandmortyapi.com/api/character`;
 const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 const HomePage: FC = () => {
@@ -24,31 +24,13 @@ const HomePage: FC = () => {
 
   const [search, setSearch] = useState<string>(searchValue);
 
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [error, setError] = useState(false);
+  const { data, isFetching, isError } = useGetCardsBySearchQuery(searchValue);
 
-  useEffect(() => {
-    setIsLoaded(false);
-    setError(false);
-    const requestUrl =
-      searchValue === `` ? `${baseUrl}` : `${baseUrl}/?name=${searchValue}`;
-
-    fetch(requestUrl, { method: 'GET' })
-      .then((response) => {
-        if (response.status === 400) throw new Error(`Bad request`);
-        else if (response.status === 404) throw new Error(`Not found`);
-        return response.json();
-      })
-      .then((data) => {
-        setCardsList(data);
-      })
-      .then(() => setIsLoaded(true))
-      .catch((e) => {
-        setError(true);
-        alert(e.message);
-        setSearch('');
-      });
-  }, [search, searchValue]);
+  let res: JSX.Element;
+  if (isFetching) res = <p>Loading...</p>;
+  else if (isError) res = <p>Error!</p>;
+  else if (!data) res = <p>No data found...</p>;
+  else res = <p></p>;
 
   return (
     <CardsContext.Provider
@@ -64,10 +46,9 @@ const HomePage: FC = () => {
       }}
     >
       <Search />
-      <p>{}</p>
+      {res}
       <div className="cards-container" style={{ width: '100', height: '100' }}>
-        {isLoaded ? <CardList {...cardsList} /> : <p>Loading...</p>}
-        {error && <p>Error!</p>}
+        {!isFetching && !isError && <CardList {...(data as RMCardsData)} />}
       </div>
       <Modal>
         <FullCard />
