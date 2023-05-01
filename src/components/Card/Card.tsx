@@ -1,21 +1,27 @@
 import './Card.css';
 import { RMCardData } from '../../Types/Types';
-import { useContext } from 'react';
-import CardsContext from '../CardsContext/CardsContext';
+import { AppDispatch } from '../../Redux/store';
+import { useDispatch } from 'react-redux';
+import { setShowModal } from '../../Redux/Reducers/modalSlice';
+
+const useAppDispatch = () => useDispatch<AppDispatch>();
 
 const Card = (props: RMCardData): JSX.Element => {
-  const value = useContext(CardsContext);
+  const dispatch = useAppDispatch();
   return (
     <>
       <div
         className="card-wrapper"
         data-testid="card-test"
         onClick={() => {
-          value.setId(props.id);
-          value.setShow(true);
+          dispatch(
+            setShowModal({ modal: { isShowModal: true, id: props.id } })
+          );
         }}
       >
-        <h3 className="card-title">{props.name}</h3>
+        <h3 className="card-title">
+          {props.id}. {props.name}
+        </h3>
         <img
           className="card-image"
           key={props.id}

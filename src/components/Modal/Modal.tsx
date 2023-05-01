@@ -1,22 +1,27 @@
-import { useContext } from 'react';
 import PortalModal from '../PortalModal/PortalModal';
 import './Modal.css';
-import CardsContext from '../CardsContext/CardsContext';
+import { AppDispatch, RootState } from '../../Redux/store';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { setShowModal } from '../../Redux/Reducers/modalSlice';
+
+const useAppDispatch = () => useDispatch<AppDispatch>();
+const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 interface Props {
   children: JSX.Element;
 }
 
 const Modal = ({ children }: Props) => {
-  const value = useContext(CardsContext);
+  const modal = useAppSelector((state) => state.modalReducer.modal);
+  const dispatch = useAppDispatch();
 
   const handleClose = () => {
-    value.setShow(false);
+    dispatch(setShowModal({ modal: { isShowModal: false } }));
   };
 
   return (
     <>
-      {value.show && (
+      {modal.isShowModal && (
         <PortalModal wrapperId="modal-portal">
           <div className="overlay">
             <div className="modal-container">

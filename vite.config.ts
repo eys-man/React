@@ -11,6 +11,19 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: ['./src/setupTests.ts'],
-    include: ['**/*.{test,spec}.{ts,jsx,tsx}'],
+    coverage: {
+      provider: 'c8',
+      reporter: 'text',
+    },
+  },
+  server: {
+    host: true,
+    port: 3000,
+    watch: {
+      ignored: ['**/coverage/**'],
+    },
+  },
+  build: {
+    sourcemap: true,
   },
 });

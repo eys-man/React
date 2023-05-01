@@ -7,10 +7,10 @@ type Props = {
 
 const Layout = (prop: Props) => {
   return (
-    <>
+    <div>
       <Header title={prop.title} />
       <main>{prop.content}</main>
-    </>
+    </div>
   );
 };
 

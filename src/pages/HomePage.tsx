@@ -1,6 +1,5 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import Modal from '../components/Modal/Modal';
-import CardsContext from '../components/CardsContext/CardsContext';
 import Search from '../components/Search/Search';
 import FullCard from '../components/FullCard/FullCard';
 import { RMCardsData } from 'Types/Types';
@@ -13,38 +12,16 @@ const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 const HomePage: FC = () => {
   const searchValue = useAppSelector((state) => state.searchReducer.search);
-
-  const [show, setShow] = useState<boolean>(false);
-  const [id, setId] = useState<number>(-1);
-
-  const [cardsList, setCardsList] = useState<RMCardsData>({
-    results: [],
-    info: { count: 0 },
-  });
-
-  const [search, setSearch] = useState<string>(searchValue);
-
   const { data, isFetching, isError } = useGetCardsBySearchQuery(searchValue);
 
   let res: JSX.Element;
-  if (isFetching) res = <p>Loading...</p>;
-  else if (isError) res = <p>Error!</p>;
-  else if (!data) res = <p>No data found...</p>;
-  else res = <p></p>;
+  if (isFetching) res = <div>Loading...</div>;
+  else if (isError) res = <div>Error!</div>;
+  else if (!data) res = <div>No data found...</div>;
+  else res = <div></div>;
 
   return (
-    <CardsContext.Provider
-      value={{
-        show,
-        setShow,
-        id,
-        setId,
-        search,
-        setSearch,
-        cardsList,
-        setCardsList,
-      }}
-    >
+    <div>
       <Search />
       {res}
       <div className="cards-container" style={{ width: '100', height: '100' }}>
@@ -53,7 +30,7 @@ const HomePage: FC = () => {
       <Modal>
         <FullCard />
       </Modal>
-    </CardsContext.Provider>
+    </div>
   );
 };
 

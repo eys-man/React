@@ -19,5 +19,6 @@
     "baseUrl": "./src"
   },
   "include": ["vite.config.ts", ".eslintrc.cjs", "styled.d.ts", "src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "ts-node": { "esm": true, "experimentalSpecifierResolution": "node" }
 }

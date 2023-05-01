@@ -1,11 +1,12 @@
 import './FullCard.css';
-import { useContext } from 'react';
-import CardsContext from '../CardsContext/CardsContext';
 import { useGetCardByIdQuery } from '../../Redux/Reducers/apiSlice';
+import { RootState } from '../../Redux/store';
+import { TypedUseSelectorHook, useSelector } from 'react-redux';
+const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 const FullCard = (): JSX.Element => {
-  const value = useContext(CardsContext);
-  const { data, isFetching } = useGetCardByIdQuery(value.id);
+  const modal = useAppSelector((state) => state.modalReducer.modal);
+  const { data, isFetching } = useGetCardByIdQuery(modal.id as number);
 
   if (isFetching) return <p>Loading...</p>;
   else if (!data) return <p>No data found...</p>;

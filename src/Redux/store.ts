@@ -1,20 +1,29 @@
-import { configureStore } from '@reduxjs/toolkit';
+import {
+  PreloadedState,
+  combineReducers,
+  configureStore,
+} from '@reduxjs/toolkit';
 
 import searchReducer from './Reducers/searchSlice';
 import formReducer from './Reducers/formSlice';
+import modalReducer from './Reducers/modalSlice';
 import { rmApi } from './Reducers/apiSlice';
 
-export const store = configureStore({
-  reducer: {
-    searchReducer,
-    formReducer,
-    [rmApi.reducerPath]: rmApi.reducer,
-  },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }).concat(rmApi.middleware),
+const rootReducer = combineReducers({
+  searchReducer,
+  formReducer,
+  modalReducer,
+  [rmApi.reducerPath]: rmApi.reducer,
 });
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export const setupStore = (preloadedState?: PreloadedState<RootState>) =>
+  configureStore({
+    reducer: rootReducer,
+    preloadedState,
+    middleware: (getDefaultMiddleWare) =>
+      getDefaultMiddleWare().concat(rmApi.middleware),
+  });
+
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppStore = ReturnType<typeof setupStore>;
+export type AppDispatch = AppStore['dispatch'];
