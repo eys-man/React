@@ -2,9 +2,10 @@ import { describe, test } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 import FormPage from '../../pages/FormPage';
 import { Provider } from 'react-redux';
-import { store } from '../../Redux/store';
+import { setupStore } from '../../Redux/store';
 
 describe('Form', () => {
+  const store = setupStore();
   test('Renders Form', () => {
     render(
       <Provider store={store}>

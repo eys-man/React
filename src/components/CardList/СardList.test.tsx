@@ -2,8 +2,12 @@ import { describe, test } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import CardList from './CardList';
 import { RMCardsData } from '../../Types/Types';
+import { Provider } from 'react-redux';
+import { setupStore } from '../../Redux/store';
 
 describe('CardList Render', () => {
+  const store = setupStore();
+
   const cards: RMCardsData = {
     info: {
       count: 3,
@@ -73,7 +77,11 @@ describe('CardList Render', () => {
   };
 
   test('Render all cards from mock data', () => {
-    render(<CardList {...cards} />);
+    render(
+      <Provider store={store}>
+        <CardList {...cards} />
+      </Provider>
+    );
     expect(screen.getAllByTestId('card-test')).toHaveLength(3);
   });
 });

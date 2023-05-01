@@ -1,8 +1,12 @@
 import { describe, test } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import Card from './Card';
+import { Provider } from 'react-redux';
+import { setupStore } from '../../Redux/store';
 
 describe('Card', () => {
+  const store = setupStore();
+
   const props = {
     id: 10,
     name: 'Rick',
@@ -25,7 +29,11 @@ describe('Card', () => {
   };
 
   test('Render a card with a picture', () => {
-    render(<Card {...props} />);
+    render(
+      <Provider store={store}>
+        <Card {...props} />
+      </Provider>
+    );
     const img = screen.getByRole('img');
     expect(img).toBeTruthy();
     expect(screen.getByText(/Rick/)).toBeInTheDocument();

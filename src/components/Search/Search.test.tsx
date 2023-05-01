@@ -2,9 +2,10 @@ import { test } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 import Search from './Search';
 import { Provider } from 'react-redux';
-import { store } from '../../Redux/store';
+import { setupStore } from '../../Redux/store';
 
 test('Render SearchBar', () => {
+  const store = setupStore();
   render(
     <Provider store={store}>
       <Search />
@@ -14,6 +15,7 @@ test('Render SearchBar', () => {
 });
 
 test('Change value of SearchBar', () => {
+  const store = setupStore();
   render(
     <Provider store={store}>
       <Search />
