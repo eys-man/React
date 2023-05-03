@@ -1,9 +1,32 @@
-import React from 'react';
+import { FC } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import AboutPage from './pages/AboutPage';
+import NotFoundPage from './pages/NotFoundPage';
+import HomePage from './pages/HomePage';
+import Layout from './components/Layout/Layout';
+import FormPage from './pages/FormPage';
 
-function App() {
+const App: FC = () => {
   return (
-    <h1>Hello</h1>
+    <Routes>
+      <Route
+        path="/"
+        element={<Layout title="Home" content={<HomePage />} />}
+      />
+      <Route
+        path="/about"
+        element={<Layout title="About us" content={<AboutPage />} />}
+      />
+      <Route
+        path="/forms"
+        element={<Layout title="Forms" content={<FormPage />} />}
+      />
+      <Route
+        path="*"
+        element={<Layout title="Page not found" content={<NotFoundPage />} />}
+      />
+    </Routes>
   );
-}
+};
 
 export default App;
